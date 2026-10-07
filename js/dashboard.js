@@ -164,7 +164,7 @@ async function fetchTherapistsForSessions(sessions) {
     const ids = [...new Set((sessions || []).map(s => s.therapistId).filter(Boolean))];
     await Promise.all(ids.map(async (id) => {
         try {
-            const res = await fetch(`/api/therapists/${encodeURIComponent(id)}`);
+            const res = await fetch(typeof moreApi === 'function' ? moreApi(`/api/therapists/${encodeURIComponent(id)}`) : `/api/therapists/${encodeURIComponent(id)}`);
             if (res.ok) {
                 const data = await res.json();
                 map[id] = data.therapist;

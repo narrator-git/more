@@ -9,16 +9,21 @@ function _headshot(i) {
 /**
  * Image URL for therapist cards. Only returns local paths or ui-avatars fallback — never external image hosts.
  */
+function withSiteBase(path) {
+    if (typeof window !== 'undefined' && typeof window.moreAsset === 'function') return window.moreAsset(path);
+    return path;
+}
+
 function therapistPhotoUrl(therapist) {
     if (!therapist) {
         return 'https://ui-avatars.com/api/?name=T&background=6ab12f&color=fff&size=400';
     }
     const p = typeof therapist.photo === 'string' ? therapist.photo.trim() : '';
     if (p && p.startsWith('/') && !p.includes('..')) {
-        return p;
+        return withSiteBase(p);
     }
     const n = parseInt(String(therapist.id || therapist.therapistId || '0').replace(/\D/g, ''), 10) || 0;
-    return _headshot(Math.max(0, n - 1));
+    return withSiteBase(_headshot(Math.max(0, n - 1)));
 }
 
 /** Use in HTML attribute values — unescaped & in URLs breaks <img src="...&..."> */

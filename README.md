@@ -97,7 +97,7 @@ more/
 3. **Open the website:**
    - Visit `http://localhost:3000` after the server starts. The pages, accounts, therapist list, and bookings are served by this app.
 
-GitHub Pages publishes the static pages only. Log in, therapist data, bookings, and AI chat need the Node server above, plus `OPENAI_API_KEY` for AI chat.
+GitHub Pages serves the pages. Accounts, therapist data, and AI chat call the Node server. The OpenAI key stays in that server's `.env` and is not included in the website.
 
 ### Environment Setup
 

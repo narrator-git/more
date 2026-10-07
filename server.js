@@ -14,7 +14,31 @@ const PORT = process.env.PORT || 3000;
 
 // Increase payload size limit for large conversation histories
 app.use(express.json({ limit: '10mb' }));
-app.use(cors());
+app.set('trust proxy', true);
+app.use(cors({
+    origin(origin, callback) {
+        if (!origin) return callback(null, true);
+        const ok = origin === 'https://narrator-git.github.io'
+            || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+        callback(null, ok);
+    }
+}));
+
+const aiRateBuckets = new Map();
+function rateLimitAi(req, res, next) {
+    const ip = String(req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.ip || 'local').split(',')[0].trim();
+    const now = Date.now();
+    const windowMs = 10 * 60 * 1000;
+    const max = 20;
+    const recent = (aiRateBuckets.get(ip) || []).filter(ts => now - ts < windowMs);
+    if (recent.length >= max) {
+        return res.status(429).json({ error: 'Too many AI requests. Please wait a few minutes and try again.' });
+    }
+    recent.push(now);
+    aiRateBuckets.set(ip, recent);
+    next();
+}
+app.use('/api/ai', rateLimitAi);
 
 // Initialize OpenAI client only when a key is provided via the environment.
 const openai = process.env.OPENAI_API_KEY
@@ -25,6 +49,14 @@ function requireOpenAI(res) {
     if (openai) return true;
     res.status(503).json({ error: 'OPENAI_API_KEY is not configured' });
     return false;
+}
+
+function aiFailure(error) {
+    const raw = String(error && (error.code || error.message) || '');
+    if (/unsupported_country|country, region, or territory not supported/i.test(raw)) {
+        return 'AI is unavailable because OpenAI blocks the region this server is calling from.';
+    }
+    return 'Failed to get AI response';
 }
 
 // Store conversation contexts (in production, use a database)
@@ -630,11 +662,8 @@ app.post('/api/ai/chat', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('OpenAI API Error:', error);
-        res.status(500).json({ 
-            error: 'Failed to get AI response',
-            message: error.message 
-        });
+        console.error('OpenAI API Error:', error.message || error);
+        res.status(500).json({ error: aiFailure(error) });
     }
 });
 
@@ -704,8 +733,8 @@ app.post('/api/ai/chat-therapy', requireAuth, async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Therapy chat error:', error);
-        res.status(500).json({ error: 'Failed to get AI response' });
+        console.error('Therapy chat error:', error.message || error);
+        res.status(500).json({ error: aiFailure(error) });
     }
 });
 
@@ -754,7 +783,7 @@ function normalizeTherapistParamsForMatching(raw) {
             if (lower.includes(h)) out.add(h);
         }
         if (out.size > 0) return [...out];
-        if (/^[a-z][a-z\s-]+$/i.test(rawStr)) return [lower.replace(/\s+/g, '')];
+        if (/^[a-z][a-z\s-]+$/i.test(rawStr)) return [lower];
         return [];
     }
     if (Array.isArray(p.specialty)) {
@@ -794,6 +823,7 @@ function normalizeTherapistParamsForMatching(raw) {
     if (/^男|男性/.test(String(p.gender || ''))) p.gender = 'male';
     else if (/^女|女性/.test(String(p.gender || ''))) p.gender = 'female';
     else if (/不限|任意|无所谓|都可以/.test(String(p.gender || ''))) p.gender = 'any';
+    else if (g === 'male' || g === 'female' || g === 'any' || g === 'non-binary') p.gender = g;
 
     const el = String(p.experienceLevel || '').trim().toLowerCase();
     if (/初级|初級/.test(String(p.experienceLevel || ''))) p.experienceLevel = 'junior';
@@ -812,7 +842,7 @@ function normalizeTherapistParamsForMatching(raw) {
 }
 
 // Therapist matching endpoint
-app.post('/api/therapist/match', requireAuth, async (req, res) => {
+app.post('/api/therapist/match', async (req, res) => {
     try {
         let { therapistParams } = req.body;
         therapistParams = normalizeTherapistParamsForMatching(therapistParams || {});
@@ -848,13 +878,6 @@ app.post('/api/therapist/match', requireAuth, async (req, res) => {
                 score += (specialtyMatches / paramSpecs.length) * 50;
             }
             
-            // Location (critical for face-to-face)
-            if (wantFaceToFace && paramLoc) {
-                const tLoc = normalizeLoc(therapist.location);
-                if (tLoc === paramLoc) score += 25;
-                else if (tLoc && (tLoc.includes(paramLoc) || paramLoc.includes(tLoc))) score += 10;
-            }
-            
             // Language (required)
             if (therapistParams.languages && therapistParams.languages.length > 0) {
                 const langs = (therapist.languages || []).map(l => (l || '').toLowerCase());
@@ -864,17 +887,33 @@ app.post('/api/therapist/match', requireAuth, async (req, res) => {
                 if (!langMatch) return { therapist, score: -1, specialtyMatches: 0 };
                 score += 10;
             }
-            
-            // Therapy type
-            const tType = (therapist.therapyType || '').toLowerCase();
-            if (therapistParams.therapyType) {
-                const want = (therapistParams.therapyType || '').toLowerCase();
-                if (tType === 'both' || want === 'both' || tType === want) score += 5;
-            }
-            
-            // Gender
+
+            // Gender is a hard requirement when the user stated one
             if (therapistParams.gender && therapistParams.gender !== 'any') {
-                if ((therapist.gender || '').toLowerCase() === therapistParams.gender.toLowerCase()) score += 5;
+                if ((therapist.gender || '').toLowerCase() !== therapistParams.gender.toLowerCase()) {
+                    return { therapist, score: -1, specialtyMatches: 0 };
+                }
+                score += 5;
+            }
+
+            // Session format must be available
+            const tType = (therapist.therapyType || '').toLowerCase();
+            if (therapistParams.therapyType && therapistParams.therapyType !== 'both') {
+                const want = therapistParams.therapyType.toLowerCase();
+                if (tType !== 'both' && tType !== want) {
+                    return { therapist, score: -1, specialtyMatches: 0 };
+                }
+                score += 5;
+            } else if (therapistParams.therapyType) {
+                score += 5;
+            }
+
+            // In-person visits have to be in the requested city
+            if (wantFaceToFace && paramLoc) {
+                const tLoc = normalizeLoc(therapist.location);
+                const locMatch = tLoc === paramLoc || (tLoc && (tLoc.includes(paramLoc) || paramLoc.includes(tLoc)));
+                if (!locMatch) return { therapist, score: -1, specialtyMatches: 0 };
+                score += 25;
             }
             
             // Experience level
@@ -894,12 +933,24 @@ app.post('/api/therapist/match', requireAuth, async (req, res) => {
         });
         const top = valid.filter(s => s.score >= 15).slice(0, 5);
         
-        const topMatches = top.map((item, index) => ({
-            ...item.therapist,
-            id: item.therapist.id,
-            matchScore: Math.min(100, Math.round(item.score)),
-            matchLabel: index === 0 ? 'best match' : 'good match'
-        }));
+        const topMatches = top.map((item, index) => {
+            const therapist = { ...item.therapist, id: item.therapist.id };
+            if (paramSpecs.length && Array.isArray(therapist.specialization)) {
+                const matched = [];
+                const rest = [];
+                for (const spec of therapist.specialization) {
+                    const sl = String(spec || '').toLowerCase();
+                    const hit = paramSpecs.some(ps => sl.includes(ps) || ps.includes(sl));
+                    (hit ? matched : rest).push(spec);
+                }
+                therapist.specialization = [...matched, ...rest];
+            }
+            return {
+                ...therapist,
+                matchScore: Math.min(100, Math.round(item.score)),
+                matchLabel: index === 0 ? 'best match' : 'good match'
+            };
+        });
         
         res.json({ matches: topMatches });
     } catch (error) {
@@ -1065,7 +1116,7 @@ app.get('/api/ai/summary/:conversationId', (req, res) => {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-    res.json({ status: 'ok' });
+    res.json({ status: 'ok', ai: Boolean(openai) });
 });
 
 // ----- Static frontend (HTML/CSS/JS from project root) -----

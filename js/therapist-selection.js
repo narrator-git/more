@@ -79,7 +79,7 @@ function translateBio(bio) {
 async function initTherapistSelection() {
     // Load therapists from API (DB only - no mock fallback)
     try {
-        const res = await fetch('/api/therapists');
+        const res = await fetch((typeof moreApi === 'function' ? moreApi('/api/therapists') : '/api/therapists'));
         if (res.ok) {
             const data = await res.json();
             allTherapists = (data.therapists || []).map(t => ({ ...t, id: t.id || t.therapistId }));

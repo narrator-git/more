@@ -3,7 +3,7 @@
 
 // Same-origin so deploy (VDS) and phone work; avoids Chrome "local network" permission
 // for public-site → localhost requests. Local dev: serve site from the same server/port.
-const API_BASE = '';
+const API_BASE = (typeof window !== 'undefined' && window.MORE_API_BASE) ? window.MORE_API_BASE.replace(/\/$/, '') : '';
 
 function getSessionToken() {
     return localStorage.getItem('sessionToken');

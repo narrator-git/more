@@ -97,7 +97,7 @@ async function initBooking() {
     }
 
     try {
-        const res = await fetch(`/api/therapists/${encodeURIComponent(therapistId)}`);
+        const res = await fetch(typeof moreApi === 'function' ? moreApi(`/api/therapists/${encodeURIComponent(therapistId)}`) : `/api/therapists/${encodeURIComponent(therapistId)}`);
         if (res.ok) {
             const data = await res.json();
             selectedTherapist = { ...data.therapist, id: therapistId };
@@ -110,7 +110,7 @@ async function initBooking() {
     }
 
     try {
-        const res = await fetch(`/api/therapists/${encodeURIComponent(therapistId)}/booked-slots`);
+        const res = await fetch(typeof moreApi === 'function' ? moreApi(`/api/therapists/${encodeURIComponent(therapistId)}/booked-slots`) : `/api/therapists/${encodeURIComponent(therapistId)}/booked-slots`);
         if (res.ok) {
             const data = await res.json();
             bookedSlots = data.slots || [];

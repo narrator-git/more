@@ -4,7 +4,7 @@ const MIN_CONVERSATION_LENGTH = 5;
 const MAX_CONVERSATION_LENGTH = 10;
 
 // API Configuration
-const API_BASE_URL = '/api/ai';
+const API_BASE_URL = ((typeof window !== 'undefined' && window.MORE_API_BASE) ? window.MORE_API_BASE.replace(/\/$/, '') : '') + '/api/ai';
 
 let conversationCount = 0;
 let isWaitingForResponse = false;
@@ -432,19 +432,21 @@ async function generateAIResponse(userMessage) {
         }
 
         // Call the API
+        const headers = { 'Content-Type': 'application/json' };
+        const token = typeof getSessionToken === 'function' ? getSessionToken() : null;
+        if (token) headers.Authorization = 'Bearer ' + token;
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers,
             body: JSON.stringify(requestBody)
         });
 
+        const data = await response.json().catch(() => ({}));
         if (!response.ok) {
-            throw new Error(`API error: ${response.status}`);
+            const err = new Error(data.error || `API error: ${response.status}`);
+            err.status = response.status;
+            throw err;
         }
-
-        const data = await response.json();
         
         hideTypingIndicator();
         
@@ -497,7 +499,9 @@ async function generateAIResponse(userMessage) {
         const modalOverlay = document.getElementById('modal-overlay');
         if (!modalOverlay || modalOverlay.style.display === 'none') {
             // Fallback to a helpful error message
-            const errorMessage = tt('chat.connectionIssue', "I'm having trouble connecting right now. Please try again in a moment, or feel free to continue sharing.");
+            const errorMessage = error && error.message && error.message !== 'Failed to fetch'
+                ? error.message
+                : tt('chat.connectionIssue', "I'm having trouble connecting right now. Please try again in a moment, or feel free to continue sharing.");
             addMessageToUI('ai', errorMessage);
             await DataManager.addMessage('ai', errorMessage, conversationId);
             
