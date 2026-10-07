@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header has-logo">
+        <a href="index.html" class="header-logo header-logo-visible">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link" data-i18n="nav.moreAI">more AI</a>
+            <a href="therapist-selection.html" class="nav-link" data-i18n="nav.psychologists">Our psychologists</a>
+            <a href="#" class="nav-link" data-i18n="nav.help">Help</a>
+        </nav>
+    </header>
+
+    <!-- Onboarding Section -->
+    <section class="onboarding-section">
+        <div class="onboarding-container">
+            <div class="progress-container">
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="progress-text" id="progress-text">Question 1 of 7</div>
+            </div>
+            
+            <div id="question-container" class="question-container">
+                <!-- Questions will be rendered here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="js/onboarding.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initI18n === 'function') initI18n();
+        });
+    </script>
+</body>
+</html>

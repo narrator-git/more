@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Therapist - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header has-logo">
+        <a href="index.html" class="header-logo header-logo-visible">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link" data-i18n="nav.moreAI">more AI</a>
+            <a href="therapist-selection.html" class="nav-link" data-i18n="nav.psychologists">Our psychologists</a>
+            <a href="dashboard.html" class="nav-link" id="nav-auth-link" data-i18n="nav.dashboard">Dashboard</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="therapist-hero">
+        <div class="therapist-hero-inner">
+            <h1 class="therapist-hero-title" data-i18n="selection.title">Find Your Therapist</h1>
+            <p class="therapist-hero-subtitle" data-i18n="selection.subtitle">Licensed professionals matched to your needs — online or in person</p>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <section class="therapist-main">
+        <div class="therapist-main-inner">
+            <!-- Search -->
+            <div class="tf-search-wrap">
+                <svg class="tf-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="therapist-search" class="tf-search" placeholder="Search by name, specialty, or keyword..." aria-label="Search therapists">
+            </div>
+
+            <!-- Filter chips row -->
+            <div class="tf-bar">
+                <div class="tf-filters">
+                    <select id="specialization-filter" class="tf-select" aria-label="Specialization">
+                        <option value="">Specialization</option>
+                    </select>
+                    <select id="language-filter" class="tf-select" aria-label="Language">
+                        <option value="">Language</option>
+                    </select>
+                    <select id="therapy-type-filter" class="tf-select" aria-label="Session type">
+                        <option value="">Session Type</option>
+                    </select>
+                    <select id="experience-filter" class="tf-select" aria-label="Experience">
+                        <option value="">Experience</option>
+                        <option value="junior">1-5 years</option>
+                        <option value="mid">5-10 years</option>
+                        <option value="senior">10+ years</option>
+                    </select>
+                    <div class="tf-range-group">
+                        <span class="tf-range-label">Max price</span>
+                        <input type="range" id="price-filter" class="tf-range" min="80" max="200" value="200" step="10">
+                        <span class="tf-range-value" id="price-display">$200</span>
+                    </div>
+                    <div class="tf-range-group">
+                        <span class="tf-range-label">Min rating</span>
+                        <input type="range" id="rating-filter" class="tf-range" min="0" max="5" value="0" step="0.5">
+                        <span class="tf-range-value" id="rating-display">Any</span>
+                    </div>
+                </div>
+                <div class="tf-actions">
+                    <select id="sort-filter" class="tf-select tf-sort" aria-label="Sort by">
+                        <option value="">Sort by</option>
+                        <option value="rating">Highest rated</option>
+                        <option value="price-low">Price: low to high</option>
+                        <option value="price-high">Price: high to low</option>
+                        <option value="experience">Most experienced</option>
+                    </select>
+                    <button class="tf-reset" id="clear-filters">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <div class="tf-results">
+                <span id="results-count">Showing all therapists</span>
+            </div>
+
+            <!-- Therapists Grid -->
+            <div id="therapists-container" class="therapist-cards-grid">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </section>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="js/therapist-selection.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initI18n === 'function') initI18n();
+        });
+    </script>
+</body>
+</html>

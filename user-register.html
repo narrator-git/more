@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <!-- Register Section -->
+    <section class="login-section">
+        <div class="login-lang-wrap" id="login-lang-wrap"></div>
+        <div class="login-container">
+            <div class="login-header">
+                <a href="index.html" class="login-logo-link">
+                    <h1 class="login-title">more</h1>
+                </a>
+                <p class="login-subtitle" data-i18n="auth.createAccount">Create your account</p>
+            </div>
+
+            <form class="login-form" id="register-form">
+                <div class="form-group">
+                    <label for="email" class="form-label" data-i18n="auth.email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        data-i18n="auth.placeholderEmail"
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label" data-i18n="auth.password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        data-i18n="auth.placeholderCreatePassword"
+                        placeholder="Create a password"
+                        required
+                        autocomplete="new-password"
+                        minlength="6"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password" class="form-label" data-i18n="auth.confirmPassword">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirm-password" 
+                        name="confirm-password" 
+                        class="form-input" 
+                        data-i18n="auth.placeholderConfirm"
+                        placeholder="Confirm your password"
+                        required
+                        autocomplete="new-password"
+                    >
+                </div>
+
+                <div class="form-error" id="form-error"></div>
+
+                <button type="submit" class="btn btn-primary btn-login-submit" id="register-submit-btn" data-i18n="auth.createAccountBtn">
+                    Create Account
+                </button>
+
+                <div class="form-divider">
+                    <span data-i18n="auth.hasAccount">Already have an account?</span>
+                </div>
+
+                <a href="user-login.html" class="btn btn-outline btn-register-link" data-i18n="auth.signIn">
+                    Sign In
+                </a>
+            </form>
+        </div>
+    </section>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initI18nLogin === 'function') initI18nLogin('#login-lang-wrap');
+            const form = document.getElementById('register-form');
+            const errorDiv = document.getElementById('form-error');
+            const submitBtn = document.getElementById('register-submit-btn');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                errorDiv.textContent = '';
+                errorDiv.style.display = 'none';
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+
+                if (!email || !password || !confirmPassword) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Creating account...';
+
+                try {
+                    const result = await AuthAPI.register(email, password);
+                    if (result.token) {
+                        if (typeof AccountManager !== 'undefined') {
+                            AccountManager.clearLoggedOutFlag();
+                        }
+                        window.location.href = 'onboarding.html';
+                    }
+                } catch (error) {
+                    let errorMsg = 'Registration failed. Please try again.';
+                    if (error.status === 404) {
+                        errorMsg = 'Server not found. Please make sure the server is running (npm start).';
+                    } else if (error.status === 409 || error.status === 400) {
+                        errorMsg = error.data?.error || 'Email already exists or invalid data.';
+                    } else if (error.data && error.data.error) {
+                        errorMsg = error.data.error;
+                    }
+                    showError(errorMsg);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Create Account';
+                }
+            });
+
+            function showError(message) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

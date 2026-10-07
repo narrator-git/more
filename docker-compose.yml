@@ -1,0 +1,23 @@
+# Local review: run from this directory before pushing to prod
+# Usage: docker compose build && docker compose up -d
+# Prod compose (with Traefik) lives in parent directory.
+
+services:
+  more:
+    image: more:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: more
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - more-data:/app/data
+
+volumes:
+  more-data:

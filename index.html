@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>more - than just therapy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="main-header">
+        <a href="index.html" class="header-logo" id="header-logo" data-i18n="hero.more">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link" data-i18n="nav.moreAI">more AI</a>
+            <a href="therapist-selection.html" class="nav-link" data-i18n="nav.psychologists">Our psychologists</a>
+            <a href="user-login.html" class="nav-login-btn" id="nav-auth-link" data-i18n="nav.login">Log In</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" id="hero-title">
+                <span class="hero-title-bold" id="hero-more" data-i18n="hero.more">more</span>
+                <span class="hero-title-thin"><span data-i18n="hero.thanJust">than just a</span> <span id="animated-word" class="animated-word" data-i18n="hero.therapy">therapy</span></span>
+            </h1>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="start-now-btn" data-i18n="hero.startNow">Start now ></button>
+                <button class="btn btn-outline" id="not-sure-btn" data-i18n="hero.notSure">Not sure?</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">20+</div>
+                <div class="stat-label" data-i18n="stats.matchingParams">Matching Parameters</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label" data-i18n="stats.satisfaction">Satisfaction Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label" data-i18n="stats.aiSupport">AI Support Available</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Flow Section -->
+    <section class="process-flow-section">
+        <div class="process-container">
+            <h2 class="process-title" data-i18n="howItWorks.title">How it works</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title" data-i18n="howItWorks.step1Title">Share Your Story</h3>
+                        <p class="step-description" data-i18n="howItWorks.step1Desc">Tell us about yourself and what brings you here</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title" data-i18n="howItWorks.step2Title">AI Understands</h3>
+                        <p class="step-description" data-i18n="howItWorks.step2Desc">more AI discusses with you to get the full picture</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title" data-i18n="howItWorks.step3Title">Find Your Therapist</h3>
+                        <p class="step-description" data-i18n="howItWorks.step3Desc">Choose from AI-recommended specialists</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title" data-i18n="howItWorks.step4Title">Begin Therapy</h3>
+                        <p class="step-description" data-i18n="howItWorks.step4Desc">Start your sessions with your chosen therapist</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title" data-i18n="howItWorks.step5Title">AI Support</h3>
+                        <p class="step-description" data-i18n="howItWorks.step5Desc">Get instant pocket advice with full therapy context</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section class="ai-section">
+        <div class="ai-content">
+            <div class="ai-chat-visual">
+                <div class="chat-bubbles-container">
+                    <!-- Animated chat bubbles -->
+                    <div class="chat-bubble chat-bubble-ai chat-bubble-1">
+                        <div class="bubble-content" data-i18n="ai.bubble1">Hi! I'll help understand your situation to find the right therapist.</div>
+                    </div>
+                    <div class="chat-bubble chat-bubble-user chat-bubble-2">
+                        <div class="bubble-content" data-i18n="ai.bubble2">I've been feeling anxious lately...</div>
+                    </div>
+                    <div class="chat-bubble chat-bubble-ai chat-bubble-3">
+                        <div class="bubble-content" data-i18n="ai.bubble3">Tell me more about when this happens.</div>
+                    </div>
+                    <div class="chat-bubble chat-bubble-user chat-bubble-4">
+                        <div class="bubble-content" data-i18n="ai.bubble4">Usually at work, when I have deadlines</div>
+                    </div>
+                    <!-- Pulsing typing indicator -->
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-text-content">
+                <div class="ai-badge" data-i18n="ai.badge">24/7 Available</div>
+                <h2 class="ai-title">
+                    <span class="ai-title-main" data-i18n="ai.titleChat">CHAT WITH</span>
+                    <span class="ai-title-accent" data-i18n="ai.titleAccent">more AI</span>
+                </h2>
+                <p class="ai-description" data-i18n="ai.description">
+                    <strong>Step 2:</strong> Discuss your situation with more AI. We'll ask questions to understand your needs, then recommend therapists who are the best fit. After you start therapy, more AI becomes your instant support tool with full context of your sessions.
+                </p>
+                <div class="ai-features">
+                    <div class="ai-feature-item">
+                        <span class="feature-icon">•</span>
+                        <span data-i18n="ai.feature1">Understands your needs</span>
+                    </div>
+                    <div class="ai-feature-item">
+                        <span class="feature-icon">•</span>
+                        <span data-i18n="ai.feature2">Recommends best therapists</span>
+                    </div>
+                    <div class="ai-feature-item">
+                        <span class="feature-icon">•</span>
+                        <span data-i18n="ai.feature3">Becomes your support tool after therapy</span>
+                    </div>
+                </div>
+                <div class="ai-chat-input-wrapper">
+                    <div class="ai-chat-input-container">
+                        <input 
+                            type="text" 
+                            class="ai-chat-input" 
+                            id="ai-main-input" 
+                            data-i18n="ai.placeholder"
+                            placeholder="Type your message here..."
+                            autocomplete="off"
+                        />
+                        <button class="ai-chat-send-btn" id="ai-main-send-btn" aria-label="Send message">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="ai-input-hint" data-i18n="ai.hint">Press Enter to send • Your message will open the chat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Therapist Section -->
+    <section class="therapist-section">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span data-i18n="therapist.findAmong">FIND PERSONAL THERAPIST AMONG</span>
+                <span data-i18n="therapist.specialists">20+ MATCHING PARAMETERS</span>
+                <span data-i18n="therapist.findAmongSuffix" class="i18n-optional"></span>
+            </h2>
+            <p class="section-description" data-i18n="therapist.sectionDesc"><strong>Step 3:</strong> After discussing with more AI, choose from therapists matched to your specific needs. All therapists are verified, licensed professionals.</p>
+        </div>
+        <div class="therapist-masonry-container" id="therapist-masonry">
+            <!-- Therapist cards will be dynamically generated here -->
+        </div>
+        <div class="section-cta">
+            <a href="therapist-selection.html" class="btn btn-primary" data-i18n="therapist.viewAll">View All Therapists →</a>
+        </div>
+    </section>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Main page initialization - structured to prevent crashes
+        (function() {
+            'use strict';
+            
+            // Wait for DOM and DataManager to be ready
+            function initMainPage() {
+                // ===== NAVBAR SCROLL EFFECT =====
+                const header = document.getElementById('main-header');
+                const headerLogo = document.getElementById('header-logo');
+                const heroTitle = document.getElementById('hero-title');
+                
+                if (header && headerLogo && heroTitle) {
+                    const scrollThreshold = 100;
+                    let ticking = false;
+
+                    function handleScroll() {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+                        
+                        if (scrollTop > scrollThreshold) {
+                            // Scrolled down - show logo in header, hide hero title
+                            header.classList.add('scrolled', 'has-logo');
+                            headerLogo.classList.add('visible');
+                            heroTitle.classList.add('scrolled');
+                        } else {
+                            // Scrolled up - hide logo in header, show hero title
+                            header.classList.remove('scrolled', 'has-logo');
+                            headerLogo.classList.remove('visible');
+                            heroTitle.classList.remove('scrolled');
+                        }
+                    }
+
+                    // Throttle scroll events
+                    window.addEventListener('scroll', function() {
+                        if (!ticking) {
+                            window.requestAnimationFrame(function() {
+                                handleScroll();
+                                ticking = false;
+                            });
+                            ticking = true;
+                        }
+                    }, { passive: true });
+
+                    // Initial scroll check
+                    handleScroll();
+                }
+
+                // ===== BUTTON HANDLERS =====
+                const startNowBtn = document.getElementById('start-now-btn');
+                const notSureBtn = document.getElementById('not-sure-btn');
+
+                if (startNowBtn) {
+                    startNowBtn.addEventListener('click', async function(e) {
+                        e.preventDefault();
+                        if (typeof getSessionToken === 'function' && getSessionToken()) {
+                            if (typeof DataManager !== 'undefined' && await DataManager.hasCompletedOnboarding()) {
+                                window.location.href = 'ai-chat.html';
+                            } else {
+                                window.location.href = 'onboarding.html';
+                            }
+                        } else {
+                            window.location.href = 'user-login.html';
+                        }
+                    });
+                }
+
+                if (notSureBtn) {
+                    notSureBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        window.location.href = 'onboarding.html';
+                    });
+                }
+
+                // ===== AI CHAT INPUT HANDLER =====
+                const aiMainInput = document.getElementById('ai-main-input');
+                const aiMainSendBtn = document.getElementById('ai-main-send-btn');
+                
+                function sendMainPageMessage() {
+                    if (!aiMainInput) return;
+                    
+                    const message = aiMainInput.value.trim();
+                    if (!message) return;
+                    
+                    // Store the message to be sent when chat page opens
+                    try {
+                        localStorage.setItem('pendingAIMessage', message);
+                    } catch (e) {
+                        sessionStorage.setItem('pendingAIMessage', message);
+                    }
+                    
+                    // Go to AI chat - onboarding will redirect here if not completed
+                    window.location.href = 'ai-chat.html';
+                }
+                
+                if (aiMainInput && aiMainSendBtn) {
+                    // Send on button click
+                    aiMainSendBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        sendMainPageMessage();
+                    });
+                    
+                    // Send on Enter key
+                    aiMainInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            sendMainPageMessage();
+                        }
+                    });
+                }
+            }
+
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (typeof initI18n === 'function') initI18n();
+                    initMainPage();
+                });
+            } else {
+                if (typeof initI18n === 'function') initI18n();
+                initMainPage();
+            }
+        })();
+    </script>
+</body>
+</html>

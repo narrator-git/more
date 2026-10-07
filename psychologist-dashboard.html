@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychologist Dashboard - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header has-logo">
+        <a href="index.html" class="header-logo header-logo-visible">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link">more AI</a>
+            <a href="therapist-selection.html" class="nav-link">Our psychologists</a>
+            <a href="psychologist-dashboard.html" class="nav-link" id="nav-auth-link">Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="dash">
+        <!-- Sidebar -->
+        <aside class="dash-sidebar">
+            <div class="dash-sidebar-profile">
+                <div class="dash-avatar dash-avatar-psych" id="dash-avatar">?</div>
+                <p class="dash-sidebar-name" id="dash-sidebar-name">Doctor</p>
+                <p class="dash-sidebar-email" id="dash-sidebar-email"></p>
+            </div>
+            <nav class="dash-sidebar-nav">
+                <button class="dash-nav-item active" data-tab="overview">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                    </span>
+                    Overview
+                </button>
+                <button class="dash-nav-item" data-tab="schedule">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </span>
+                    Schedule
+                </button>
+                <button class="dash-nav-item" data-tab="patients">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </span>
+                    Patients
+                </button>
+                <button class="dash-nav-item" data-tab="profile">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </span>
+                    Profile
+                </button>
+                <button class="dash-nav-item" data-tab="support">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 1.9-2 2.4l-1 .5v1.8"/><circle cx="12" cy="16.2" r="1.2"/></svg>
+                    </span>
+                    Support
+                </button>
+            </nav>
+            <div class="dash-sidebar-footer">
+                <button class="dash-nav-item dash-logout-btn" id="logout-btn">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </span>
+                    Log Out
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="dash-main">
+            <!-- Overview Tab -->
+            <div class="dash-tab active" id="tab-overview">
+                <div class="dash-header">
+                    <h1 class="dash-title" id="psych-greeting">Welcome, Doctor</h1>
+                </div>
+
+                <div class="dash-cards-row">
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#e8f5e8;color:#6ab12f;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-upcoming">0</span>
+                            <span class="dash-stat-label">Upcoming Sessions</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#e3f2fd;color:#1976d2;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-patients">0</span>
+                            <span class="dash-stat-label">Total Patients</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#fff3cd;color:#f9a71a;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-assessments">0</span>
+                            <span class="dash-stat-label">Initial Assessments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="psych-upcoming" class="dash-section"></div>
+            </div>
+
+            <!-- Schedule Tab -->
+            <div class="dash-tab" id="tab-schedule">
+                <div class="dash-header">
+                    <h1 class="dash-title">Schedule</h1>
+                </div>
+                <div id="schedule-all" class="dash-section"></div>
+            </div>
+
+            <!-- Patients Tab -->
+            <div class="dash-tab" id="tab-patients">
+                <div class="dash-header">
+                    <h1 class="dash-title">Patients</h1>
+                </div>
+                <div id="patients-list" class="dash-section"></div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="dash-tab" id="tab-profile">
+                <div class="dash-header">
+                    <h1 class="dash-title">Profile</h1>
+                </div>
+                <div id="psych-profile-card" class="dash-section"></div>
+            </div>
+
+            <!-- Support Tab -->
+            <div class="dash-tab" id="tab-support">
+                <div class="dash-header">
+                    <h1 class="dash-title">Support</h1>
+                </div>
+                <div class="dash-support-grid">
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6ab12f" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <h3>Contact Admin</h3>
+                        <p>Reach out for account, technical, or billing support.</p>
+                        <a href="mailto:psychologist-support@more-therapy.com" class="btn btn-outline btn-sm dash-support-btn">Send Email</a>
+                    </div>
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6ab12f" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 1.9-2 2.4l-1 .5v1.8"/><circle cx="12" cy="16.2" r="1.2"/></svg>
+                        </div>
+                        <h3>Resources</h3>
+                        <p>Access clinical resources, guidelines, and best practices.</p>
+                        <button class="btn btn-outline btn-sm dash-support-btn" disabled>Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="js/psychologist-dashboard.js"></script>
+</body>
+</html>

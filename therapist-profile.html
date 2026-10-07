@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Profile - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header has-logo">
+        <a href="index.html" class="header-logo header-logo-visible">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link" data-i18n="nav.moreAI">more AI</a>
+            <a href="therapist-selection.html" class="nav-link" data-i18n="nav.psychologists">Our psychologists</a>
+            <a href="dashboard.html" class="nav-link" data-i18n="nav.dashboard">Dashboard</a>
+        </nav>
+    </header>
+
+    <!-- Therapist Profile Section - Redesigned -->
+    <section class="therapist-profile-section therapist-profile-modern">
+        <div class="profile-modern-container">
+            <!-- Left: Profile Card -->
+            <div class="profile-modern-card">
+                <div id="therapist-profile" class="profile-modern-content">
+                    <!-- Therapist profile will be rendered here -->
+                </div>
+            </div>
+
+            <!-- Right: Booking Panel -->
+            <div class="booking-modern-panel">
+                <h3 class="booking-panel-title" data-i18n="booking.title">Book a session</h3>
+
+                <!-- Session type selector -->
+                <div class="session-type-selector" id="session-type-selector">
+                    <label class="session-type-label" data-i18n="booking.sessionType">Session type</label>
+                    <div class="session-type-options" id="session-type-options">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Calendar widget -->
+                <div class="calendar-widget" id="booking-calendar">
+                    <div class="calendar-header">
+                        <button type="button" class="calendar-nav-btn" id="calendar-prev" aria-label="Previous month">‹</button>
+                        <h4 class="calendar-month-title" id="calendar-month-title">January 2025</h4>
+                        <button type="button" class="calendar-nav-btn" id="calendar-next" aria-label="Next month">›</button>
+                    </div>
+                    <div class="calendar-grid-header">
+                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                    </div>
+                    <div class="calendar-days" id="calendar-days">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Time slots -->
+                <div class="time-slots-panel" id="time-slots-panel">
+                    <label class="time-slots-label" data-i18n="booking.availableTimes">Available times</label>
+                    <div class="time-slots-grid" id="time-slots-grid">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-block" id="book-session-btn" disabled data-i18n="booking.selectDateTime">Select date and time</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="js/booking.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initI18n === 'function') initI18n();
+        });
+    </script>
+</body>
+</html>

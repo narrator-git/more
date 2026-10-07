@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - more</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header has-logo">
+        <a href="index.html" class="header-logo header-logo-visible">more</a>
+        <nav class="nav">
+            <a href="ai-chat.html" class="nav-link" data-i18n="nav.moreAI">more AI</a>
+            <a href="therapist-selection.html" class="nav-link" data-i18n="nav.psychologists">Our psychologists</a>
+            <a href="dashboard.html" class="nav-link" id="nav-auth-link" data-i18n="nav.dashboard">Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="dash">
+        <!-- Sidebar -->
+        <aside class="dash-sidebar">
+            <div class="dash-sidebar-profile">
+                <div class="dash-avatar" id="dash-avatar">?</div>
+                <p class="dash-sidebar-name" id="dash-sidebar-name" data-i18n="dash.welcome">Welcome</p>
+                <p class="dash-sidebar-email" id="dash-sidebar-email"></p>
+            </div>
+            <nav class="dash-sidebar-nav">
+                <button class="dash-nav-item active" data-tab="overview">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                    </span>
+                    <span data-i18n="dash.overview">Overview</span>
+                </button>
+                <button class="dash-nav-item" data-tab="schedule">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </span>
+                    <span data-i18n="dash.schedule">Schedule</span>
+                </button>
+                <button class="dash-nav-item" data-tab="journal">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </span>
+                    <span data-i18n="dash.journal">Journal</span>
+                </button>
+                <button class="dash-nav-item" data-tab="profile">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </span>
+                    <span data-i18n="dash.profile">Profile</span>
+                </button>
+                <button class="dash-nav-item" data-tab="support">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 1.9-2 2.4l-1 .5v1.8"/><circle cx="12" cy="16.2" r="1.2"/></svg>
+                    </span>
+                    <span data-i18n="dash.support">Support</span>
+                </button>
+            </nav>
+            <div class="dash-sidebar-footer">
+                <button class="dash-nav-item dash-logout-btn" id="logout-btn">
+                    <span class="dash-nav-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </span>
+                    <span data-i18n="nav.logout">Log Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="dash-main">
+            <!-- Overview Tab -->
+            <div class="dash-tab active" id="tab-overview">
+                <div class="dash-header">
+                    <h1 class="dash-title" id="user-greeting" data-i18n="dash.hello">Hello!</h1>
+                    <a href="therapist-selection.html" class="dash-header-action btn btn-primary" data-i18n="dash.bookSession">Book a Session</a>
+                </div>
+
+                <div class="dash-cards-row">
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#e8f5e8;color:#6ab12f;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-upcoming">0</span>
+                            <span class="dash-stat-label" data-i18n="dash.upcomingSessions">Upcoming Sessions</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#fff3cd;color:#f9a71a;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-completed">0</span>
+                            <span class="dash-stat-label" data-i18n="dash.completedSessions">Completed Sessions</span>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-stat-icon" style="background:#ede7f6;color:#7c4dff;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        </div>
+                        <div class="dash-stat-info">
+                            <span class="dash-stat-number" id="stat-notes">0</span>
+                            <span class="dash-stat-label" data-i18n="dash.journalEntries">Journal Entries</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="next-session" class="dash-section">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <div id="upcoming-sessions" class="dash-section">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <div id="therapist-notes-section" class="dash-section">
+                    <!-- Notes for therapist - rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Schedule Tab -->
+            <div class="dash-tab" id="tab-schedule">
+                <div class="dash-header">
+                    <h1 class="dash-title">Schedule</h1>
+                    <a href="therapist-selection.html" class="dash-header-action btn btn-primary">Book New</a>
+                </div>
+                <div id="schedule-upcoming" class="dash-section"></div>
+                <div id="schedule-history" class="dash-section"></div>
+            </div>
+
+            <!-- Journal Tab -->
+            <div class="dash-tab" id="tab-journal">
+                <div class="dash-header">
+                    <h1 class="dash-title">Journal</h1>
+                </div>
+                <div id="journal-entries" class="dash-section"></div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="dash-tab" id="tab-profile">
+                <div class="dash-header">
+                    <h1 class="dash-title">Profile</h1>
+                </div>
+                <div class="dash-profile-card" id="profile-card">
+                    <!-- Rendered by JS -->
+                </div>
+                <div class="dash-section" style="margin-top:24px;">
+                    <div class="dash-card">
+                        <h3 class="dash-card-title">Account</h3>
+                        <p class="dash-card-subtitle" id="profile-email-display"></p>
+                        <div style="margin-top:16px;display:flex;gap:12px;">
+                            <button class="btn btn-outline btn-sm dash-delete-account-btn" id="delete-account-btn">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Tab -->
+            <div class="dash-tab" id="tab-support">
+                <div class="dash-header">
+                    <h1 class="dash-title">Support</h1>
+                </div>
+                <div class="dash-support-grid">
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6ab12f" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                        </div>
+                        <h3>Chat with more AI</h3>
+                        <p>Get 24/7 support from our AI assistant between therapy sessions.</p>
+                        <a href="ai-chat.html" class="btn btn-outline btn-sm dash-support-btn">Open Chat</a>
+                    </div>
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6ab12f" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <h3>Contact Support</h3>
+                        <p>Reach our team for technical issues, billing, or general questions.</p>
+                        <a href="mailto:support@more-therapy.com" class="btn btn-outline btn-sm dash-support-btn">Send Email</a>
+                    </div>
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6ab12f" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 1.9-2 2.4l-1 .5v1.8"/><circle cx="12" cy="16.2" r="1.2"/></svg>
+                        </div>
+                        <h3>FAQ</h3>
+                        <p>Find answers to common questions about sessions, payments, and privacy.</p>
+                        <button class="btn btn-outline btn-sm dash-support-btn" disabled>Coming Soon</button>
+                    </div>
+                    <div class="dash-card dash-support-card">
+                        <div class="dash-support-icon dash-support-icon-crisis">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f54e29" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="1"/></svg>
+                        </div>
+                        <h3>Crisis Resources</h3>
+                        <p>If you or someone you know is in crisis, please reach out immediately.</p>
+                        <a href="tel:988" class="btn btn-outline btn-sm dash-support-btn dash-support-btn-crisis">Call 988</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile bottom tab bar (visible < 900px) -->
+    <nav class="dash-mobile-tabs" id="dash-mobile-tabs">
+        <button class="dash-mobile-tab active" data-tab="overview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span data-i18n="dash.overview">Overview</span>
+        </button>
+        <button class="dash-mobile-tab" data-tab="schedule">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span data-i18n="dash.schedule">Schedule</span>
+        </button>
+        <button class="dash-mobile-tab" data-tab="journal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span data-i18n="dash.journal">Journal</span>
+        </button>
+        <button class="dash-mobile-tab" data-tab="profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span data-i18n="dash.profile">Profile</span>
+        </button>
+        <button class="dash-mobile-tab" data-tab="support">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9c0-1.5 1.3-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 1.9-2 2.4l-1 .5v1.8"/><circle cx="12" cy="16.2" r="1.2"/></svg>
+            <span data-i18n="dash.support">Support</span>
+        </button>
+    </nav>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/nav-auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initI18n === 'function') initI18n();
+        });
+    </script>
+</body>
+</html>
