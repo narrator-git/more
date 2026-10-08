@@ -11,6 +11,7 @@ const db = require('./db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const BIND_HOST = process.env.BIND_HOST || '0.0.0.0';
 
 // Increase payload size limit for large conversation histories
 app.use(express.json({ limit: '10mb' }));
@@ -1167,8 +1168,8 @@ app.get('*', (req, res, next) => {
 // Seed psychologist accounts on startup
 seedPsychologistAccounts();
 
-app.listen(PORT, () => {
-    console.log(`more AI server running on http://localhost:${PORT}`);
+app.listen(PORT, BIND_HOST, () => {
+    console.log(`more AI server running on http://${BIND_HOST}:${PORT}`);
     console.log(`Website: http://localhost:${PORT}/`);
     console.log(`Health check: http://localhost:${PORT}/health`);
     console.log(`Database: ${db.db.name}`);

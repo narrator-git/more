@@ -1,7 +1,7 @@
 // Public site settings. The OpenAI key never belongs in this file.
 // MORE_API_BASE is set only for GitHub Pages. Local pages talk to the same server.
 (function () {
-    var LIVE_API = 'https://resulting-bean-substances-finding.trycloudflare.com';
+    var LIVE_API = 'https://37.114.63.12.sslip.io';
     var host = location.hostname;
     window.MORE_API_BASE = host.endsWith('github.io') ? LIVE_API.replace(/\/$/, '') : '';
 
